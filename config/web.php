@@ -43,14 +43,31 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        'assetManager' => [
+            // override bundles to use CDN :
+            'bundles' => [
+                'yii\bootstrap4\BootstrapAsset' => [
+                    'sourcePath' => null,
+                    'baseUrl' => 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1',
+                    'css' => [
+                        'css/bootstrap.min.css'
+                    ],
+                ],
+                'yii\bootstrap4\BootstrapPluginAsset' => [
+                    'sourcePath' => null,
+                    'baseUrl' => 'https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1',
+                    'js' => [
+                        'js/bootstrap.min.js'
+                    ],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
