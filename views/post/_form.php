@@ -25,6 +25,7 @@
           ]
         ]); ?>
       </div>
+      <?=$form->field($model, 'image')->fileInput()?>
       <div class="form-group">
         <?php echo Html::submitButton('Post', ['class' => 'btn btn-primary', 'name' => 'post']) ?>
       </div>

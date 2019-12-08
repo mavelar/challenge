@@ -31,7 +31,13 @@ class PostController extends \yii\web\Controller
         if($post) {
             try {
                 if($model->load($post)) {
+                    $model->image = UploadedFile::getInstance($model, 'image');
+                    
                     if (!$model->save()) {
+                        return null;
+                    }
+
+                    if(!$model->upload()) {
                         return null;
                     }
                 }
@@ -48,9 +54,13 @@ class PostController extends \yii\web\Controller
         ]);
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
-        return $this->render('delete');
+        $model = Post::findOne($id);
+
+        $model->delete();
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     public function actionIndex($uid=null)
@@ -93,8 +103,16 @@ class PostController extends \yii\web\Controller
         if($post) {
             try {
                 if($model->load($post)) {
+                    $model->image = UploadedFile::getInstance($model, 'image');
+
                     if (!$model->save()) {
                         return null;
+                    }
+
+                    if($model->image) {
+                        if(!$model->upload()) {
+                            return null;
+                        }
                     }
                 }
 
