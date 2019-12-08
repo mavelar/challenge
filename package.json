@@ -1,0 +1,36 @@
+{
+  "name": "jobsity-coding",
+  "version": "1.0.0",
+  "description": "Jobsity Coding Challenge",
+  "main": "index.php",
+  "dependencies": {
+    "@babel/core": "^7.6.4",
+    "bootstrap": "4.3.1",
+    "jquery": "3.4.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.6.3",
+    "browser-sync": "2.26.7",
+    "del": "4.1.1",
+    "gulp": "4.0.2",
+    "gulp-autoprefixer": "6.1.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "4.2.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "1.4.0",
+    "gulp-sass": "4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "merge-stream": "2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Manuel Avelar",
+  "license": "ISC",
+  "homepage": ""
+}

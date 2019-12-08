@@ -27,6 +27,11 @@ $config = [
         ],
         'db' => $db,
     ],
+    'modules' => [
+        'user' => [
+            'class' => 'yii2mod\user\ConsoleModule',
+        ],
+    ],
     'params' => $params,
     /*
     'controllerMap' => [

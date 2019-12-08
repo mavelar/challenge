@@ -20,18 +20,30 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'yii2mod\user\models\UserModel',
+            // for update last login date for user, you can call the `afterLogin` event as follows
+            'on afterLogin' => function ($event) {
+                $event->identity->updateLastLogin();
+            }
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+			'viewPath' => '@app/mail',
+			'useFileTransport' => false,
+			'enableSwiftMailerLogging' => true,
+			'transport' => [
+				'class' => 'Swift_SmtpTransport',
+				'host' => 'smtp.mailtrap.io',
+				'username' => '9a8933f0280486',
+				'password' => 'd32bd58c941f15',
+				'port' => '2525',
+			],
+			'messageConfig' => [
+				'from' => 'no-reply@mavelar.com' // sender address goes here
+			]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -47,6 +59,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/<action:login|logout|signup|request-reset|request-password-reset>' => 'site/<action>',
+                // '<controller:\w+>/<id:\d+>' => '<controller>/view',
+				// '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
         'assetManager' => [
@@ -68,6 +84,14 @@ $config = [
                 ],
             ],
         ],
+        'i18n' => [
+            'translations' => [
+                'yii2mod.user' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@yii2mod/user/messages',
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
@@ -78,14 +102,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 }
 

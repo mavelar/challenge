@@ -44,8 +44,27 @@ class SiteController extends Controller
     public function actions()
     {
         return [
+            'login' => [
+                'class' => 'yii2mod\user\actions\LoginAction',
+                'layout' => 'page',
+            ],
+            'logout' => [
+                'class' => 'yii2mod\user\actions\LogoutAction'
+            ],
+            'signup' => [
+                'class' => 'yii2mod\user\actions\SignupAction',
+                'view' => '@app/views/site/signup',
+            ],
+            'request-password-reset' => [
+                'class' => 'yii2mod\user\actions\RequestPasswordResetAction'
+            ],
+            'password-reset' => [
+                'class' => 'yii2mod\user\actions\PasswordResetAction',
+                'view' => '@app/views/site/resetPassword',
+            ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+                'layout' => 'page',
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',

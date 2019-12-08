@@ -24,9 +24,9 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
     <?=$this->render('_navbar')?>
-    <?=$this->render('_hero')?>
-
-    <?=$content?>
+    <div class="container">
+      <?=$content?>
+    </div>
 
 <?php $this->endBody() ?>
 </body>
