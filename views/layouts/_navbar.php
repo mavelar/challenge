@@ -9,8 +9,8 @@
 
     if(!Yii::$app->user->isGuest) {
         $items = [
-            ['label' => 'New Post', 'url' => ['/new-post']],
-            ['label' => 'My Posts', 'url' => ['/my-posts']],
+            ['label' => 'New Post', 'url' => ['/post/create']],
+            ['label' => 'My Posts', 'url' => ['/post','uid' => Yii::$app->user->id]],
             ['label' => 'Profile', 'url' => ['/profile']],
             ['label' => 'Logout', 'url' => ['/logout'], 'linkOptions' => ['data-method' => 'post']],
         ];

@@ -1,9 +1,8 @@
 <?php
-/* @var $this yii\web\View */
+use yii\helpers\Html;
 ?>
-<h1>post/view</h1>
-
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+<h1><?=$model->title?></h1>
+<p>By <?=Html::a($model->user->username, ['/post/','author' => $model->author])?> on <?=Yii::$app->formatter->asDate($model->date_created)?></p>
+<div>
+    <?=$model->content?>
+</div>

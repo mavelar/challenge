@@ -60,7 +60,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '/<action:login|logout|signup|request-reset|request-password-reset>' => 'site/<action>',
-                // '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
 				// '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
