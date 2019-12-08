@@ -3,11 +3,13 @@
 namespace app\controllers;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\web\Response;
 use yii\data\Pagination;
 use app\models\Post;
 use app\models\ImageForm;
-use yii\web\UploadedFile;
-use yii\web\Response;
+use app\models\UserSocial;
+use yii2mod\user\models\UserModel as User;
 
 class PostController extends \yii\web\Controller
 {
@@ -55,6 +57,18 @@ class PostController extends \yii\web\Controller
     {
         $this->layout = 'page';
         $query = Post::find()->orderBy(['date_created' => SORT_DESC]);
+        $author = null;
+        $social = null;
+
+        if($uid) {
+            $query->where(['author' => $uid]);
+
+            $author = User::findOne($uid);
+            $social = UserSocial::findOne(['user_id' => $uid]);
+        } else {
+            return $this->redirect('/');
+        }
+
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $model = $query->offset($pages->offset)
@@ -64,6 +78,8 @@ class PostController extends \yii\web\Controller
         return $this->render('index', [
             'model' => $model,
             'pages' => $pages,
+            'author' => $author,
+            'social' => $social,
         ]);
     }
 
